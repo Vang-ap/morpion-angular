@@ -1,0 +1,43 @@
+<div id="gamer-container">
+  <h1>Morpion</h1>
+
+  <div id="config-players" *ngIf="!playersNameSave">
+    <span class="playerOne">
+      <label>Premier joueur</label>
+      <input [(ngModel)]="playerOneName" type="text">
+    </span>
+
+    <span class="playerTwo">
+      <label>Second joueur</label>
+      <input [(ngModel)]="playerTwoName" type="text">
+    </span>
+
+    <button type="button" (click)="nameSave()">Enregister</button>
+  </div>
+
+  <div>c'est au tour du joueur {{ playerOneIsPlaying ? playerOneName || '1' : playerTwoName || '2' }}</div>
+
+  <div>symbole utilisé
+    <span [hidden]="!playerOneIsPlaying">
+      X
+    </span>
+    <span [hidden]="playerOneIsPlaying">
+      O
+    </span>
+  </div>
+  <!--
+  <button (click)="changeGamer()">Changer de joueur</button> -->
+
+  <div>
+    Pourcentage de case non cochée: {{validatedCases / 9 | percent}}
+  </div>
+
+  <div *ngIf="datePlaying">
+    Date et heure du début du jeu: {{datePlaying | date:'dd/MM/y - HH:mm:ss'}}
+  </div>
+
+  <div class="grid">
+    <app-case *ngFor="let case of cases" [value]="case.value" class="case" (click)="chooseCase(case)">
+    </app-case>
+  </div>
+</div>
